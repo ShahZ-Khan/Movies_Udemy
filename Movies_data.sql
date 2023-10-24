@@ -1,8 +1,8 @@
--- Database: Movie_Data
+-- Database: owners_pets
 
--- DROP DATABASE IF EXISTS "Movie_Data";
+-- DROP DATABASE IF EXISTS owners_pets;
 
-CREATE DATABASE "Movie_Data"
+CREATE DATABASE owners_pets
     WITH
     OWNER = postgres
     ENCODING = 'UTF8'
@@ -17,61 +17,28 @@ CREATE DATABASE "Movie_Data"
 	
 	
 	
-	
-	
-	
-	
-	
-	
--- Create table for Directiors 
-
-Create Table directors(
-	director_id serial primary key,
-	first_name Varchar (30),
-	last_name Varchar (30) Not Null,
-	date_of_birth Date,
-	nationality Varchar (20)
-
+Create table owners(
+	id Serial Primary Key,
+	first_name Varchar(30),
+	last_name Varchar (30),
+	city Varchar (30),
+	state char (2)
 );
 
-Create table actors(
-	actor_id serial primary key,
-	first_name Varchar (30),
-	last_name Varchar (30) not null,
-	gender Char (1),
-	date_of_birth Date
+Create table pets(
+	id int primary key,
+	species varchar (30),
+	full_name varchar (30),
+	age int,
+	owner_id int References owners(id)
 );
+Select * From pets
+Select * From Owners
+Alter Table owners
+Add Column email Varchar (50) unique;
 
 
-Create table movies(
-	movie_id serial primary key,
-	movie_name Varchar(50) Not Null,
-	movie_length INT,
-	movie_lang Varchar (20),
-	release_date Date,
-	age_certificate Varchar (5),
-	director_id INT References directors (director_id)
-);
+ALTER TABLE owners
+ALTER COLUMN last_name TYPE VARCHAR(50);
 
-Create table movie_revenues(
-	revenue_id serial primary key,
-	movie_id INT References movies (movie_id),
-	domestic_takings Numeric (6,2),
-	international_takings Numeric (6,2)
-);
-Select * From movie_revenues
-
-
-
-Create table movie_actors(
-	movie_id INT References movies (movie_id),
-	actor_id INT References actors (actor_id),
-	Primary Key (movie_id,actor_id)
-);
-	
-Select * From movie_actors  
-
-  
-
-
-)
+Select * From Owners 
